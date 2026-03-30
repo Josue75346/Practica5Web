@@ -1,0 +1,27 @@
+﻿@model IEnumerable<SistemaFarmacia.Models.Auditoria>
+
+<h2 class="fw-bold">Registros del Sistema</h2>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Acción</th>
+            <th>Controlador</th>
+            <th>IP</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UsuarioId</td>
+                <td>@item.Accion</td>
+                <td>@item.Controlador</td>
+                <td>@item.Ip</td>
+                <td>@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>

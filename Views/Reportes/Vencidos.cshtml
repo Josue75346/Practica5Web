@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SistemaFarmacia.Models.Medicamento>
+
+<a href="/Reportes/VencidosPdf" class="btn btn-danger mb-3">Exportar PDF</a>
+
+<h2>Medicamentos Vencidos</h2>
+<hr />
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Stock</th>
+            <th>Precio</th>
+            <th>Fecha Vencimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr class="table-danger">
+                <td>@m.Nombre</td>
+                <td>@m.Categoria.Nombre</td>
+                <td>@m.Stock</td>
+                <td>@m.Precio</td>
+                <td>@m.FechaVencimiento.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table> 

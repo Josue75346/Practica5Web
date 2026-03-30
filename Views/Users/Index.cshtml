@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SistemaFarmacia.Models.ApplicationUser>
+
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<SistemaFarmacia.Models.ApplicationUser> UserManager
+
+<h2 class="fw-bold">Usuarios del sistema</h2>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead class="table-primary">
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>CI</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var u in Model)
+        {
+            var roles = await UserManager.GetRolesAsync(u);
+            var rol = roles.FirstOrDefault();
+
+            <tr>
+                <td>@u.Nombre</td>
+                <td>@u.Email</td>
+                <td>@u.CI</td>
+                <td>@rol</td>
+
+                <td>
+                    @if (u.LockoutEnd != null && u.LockoutEnd > DateTime.Now)
+                    {
+                        <span class="badge bg-danger">Bloqueado</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                </td>
+
+                <td>
+                    <a href="/Users/Edit/@u.Id" class="btn btn-warning btn-sm">Editar</a>
+
+                    @if (u.LockoutEnd == null)
+                    {
+                        <a href="/Users/Bloquear/@u.Id" class="btn btn-danger btn-sm">Bloquear</a>
+                    }
+                    else
+                    {
+                        <a href="/Users/Desbloquear/@u.Id" class="btn btn-success btn-sm">Desbloquear</a>
+                    }
+
+                    <a href="/Users/Delete/@u.Id" class="btn btn-outline-dark btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

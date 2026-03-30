@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SistemaFarmacia.Models.Medicamento>
+
+<h2>Catálogo de Medicamentos</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Precio</td>
+                <td>@item.Stock</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SistemaFarmacia.Models.Medicamento>
+
+<h2>Filtros avanzados</h2>
+<hr />
+
+<form method="get">
+    <div class="row">
+
+        <div class="col-md-3">
+            <label>Nombre</label>
+            <input type="text" name="nombre" class="form-control" />
+        </div>
+
+        <div class="col-md-3">
+            <label>Categoría</label>
+            <select name="categoriaId" class="form-control">
+                <option value="">-- Todas --</option>
+                @foreach (var c in ViewBag.Categorias)
+                {
+                    <option value="@c.CategoriaId">@c.Nombre</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label>Venc. Desde</label>
+            <input type="date" name="fechaDesde" class="form-control" />
+        </div>
+
+        <div class="col-md-2">
+            <label>Venc. Hasta</label>
+            <input type="date" name="fechaHasta" class="form-control" />
+        </div>
+
+        <div class="col-md-2">
+            <br />
+            <button class="btn btn-primary">Buscar</button>
+        </div>
+
+    </div>
+</form>
+
+<hr />
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Fecha Vencimiento</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Nombre</td>
+                <td>@m.Categoria.Nombre</td>
+                <td>@m.FechaVencimiento.ToShortDateString()</td>
+                <td>@m.Stock</td>
+            </tr>
+        }
+    </tbody>
+</table>
