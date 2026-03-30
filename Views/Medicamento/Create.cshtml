@@ -1,0 +1,50 @@
+﻿@model SistemaFarmacia.Models.Medicamento
+
+<h2>Registrar Medicamento</h2>
+
+<form asp-action="Create" method="post">
+
+    <div class="form-group">
+        <label>Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Precio</label>
+        <input asp-for="Precio" class="form-control" />
+        <span asp-validation-for="Precio" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Cantidad en Stock</label>
+        <input asp-for="Stock" class="form-control" />
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Categoría</label>
+        <select asp-for="CategoriaId" asp-items="ViewBag.Categorias" class="form-control"></select>
+        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Estante</label>
+        <select asp-for="EstanteId" asp-items="ViewBag.Estantes" class="form-control"></select>
+        <span asp-validation-for="EstanteId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Volver</a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

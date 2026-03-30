@@ -20,6 +20,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+<<<<<<< HEAD
+=======
+.card {
+    border-radius: 12px;
+}
+>>>>>>> e893658 (Segundo commit sistema farmacia Actualizado)
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);

@@ -1,0 +1,18 @@
+﻿@model SistemaFarmacia.Models.Categoria
+
+<h2>Editar Categoría</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <label>Nombre</label>
+    <input asp-for="Nombre" class="form-control" />
+    <span asp-validation-for="Nombre" class="text-danger"></span>
+
+    <label class="mt-2">Descripción</label>
+    <textarea asp-for="Descripcion" class="form-control"></textarea>
+    <span asp-validation-for="Descripcion" class="text-danger"></span>
+
+    <button class="btn btn-primary mt-3">Actualizar</button>
+</form>

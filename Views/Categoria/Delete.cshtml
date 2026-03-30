@@ -1,0 +1,18 @@
+﻿@model SistemaFarmacia.Models.Categoria
+
+<h2>Eliminar Categoría</h2>
+
+<div class="alert alert-danger">
+    ¿Seguro que deseas eliminar esta categoría?
+</div>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <p><strong>Nombre:</strong> @Model.Nombre</p>
+    <p><strong>Descripción:</strong> @Model.Descripcion</p>
+
+    <button class="btn btn-danger">Eliminar</button>
+    <a href="/Categoria/Index" class="btn btn-secondary">Cancelar</a>
+</form>

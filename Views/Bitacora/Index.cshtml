@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SistemaFarmacia.Models.Bitacora>
+
+<h2 class="fw-bold">Historial del Sistema</h2>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Acción</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UsuarioId</td>
+                <td>@item.Accion</td>
+                <td>@item.Fecha</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    var categorias = ViewBag.Categorias;
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 fw-bold">Dashboard de Inventario</h2>
+
+    <!-- TARJETAS -->
+    <div class="row g-3">
+
+        <div class="col-md-3">
+            <div class="card text-white bg-primary shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Total Medicamentos</h5>
+                    <h2>@ViewBag.TotalMedicamentos</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-danger shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Vencidos</h5>
+                    <h2>@ViewBag.Vencidos</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-warning shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Por Vencer (30 días)</h5>
+                    <h2>@ViewBag.PorVencer30</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-dark shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Bajo Stock</h5>
+                    <h2>@ViewBag.BajoStock</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TARJETAS 2 -->
+    <div class="row g-3 mt-2">
+
+        <div class="col-md-3">
+            <div class="card text-white bg-info shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Categorías Registradas</h5>
+                    <h2>@ViewBag.TotalCategorias</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-success shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Estantes Registrados</h5>
+                    <h2>@ViewBag.TotalEstantes</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- GRÁFICOS -->
+    <div class="row mt-5">
+
+        <!-- PIE CHART -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header fw-bold">
+                    Medicamentos por Categoría
+                </div>
+                <div class="card-body">
+                    <canvas id="chartCategorias"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- BAR CHART -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header fw-bold">
+                    Cantidad por Categoría
+                </div>
+                <div class="card-body">
+                    <canvas id="chartBarras"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Datos enviados desde el controlador
+    var labels = [];
+    var valores = [];
+
+    @foreach (var c in categorias)
+    {
+        @:labels.push("@c.Categoria");
+        @:valores.push(@c.Cantidad);
+    }
+
+    // -------- PIE CHART --------
+    new Chart(document.getElementById("chartCategorias"), {
+    type: "pie",
+    data: {
+    labels: labels,
+    datasets: [{
+    data: valores
+    }]
+    }
+    });
+
+    // -------- BAR CHART --------
+    new Chart(document.getElementById("chartBarras"), {
+    type: "bar",
+    data: {
+    labels: labels,
+    datasets: [{
+    label: "Cantidad",
+    data: valores
+    }]
+    }
+    });
+</script>

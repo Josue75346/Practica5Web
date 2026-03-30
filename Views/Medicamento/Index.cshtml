@@ -1,0 +1,76 @@
+﻿@model List<SistemaFarmacia.Models.Medicamento>
+
+<h2>Lista de Medicamentos</h2>
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["mensaje"]</div>
+}
+
+<a class="btn btn-primary mb-3" href="/Medicamento/Create">Agregar Medicamento</a>
+
+<form method="get" class="mb-3">
+    <input type="text" name="busqueda" placeholder="Buscar..." class="form-control w-25 d-inline" />
+
+    <select name="categoriaId" class="form-control w-25 d-inline">
+        <option value="">Todas las categorías</option>
+        @foreach (var c in ViewBag.Categorias)
+        {
+            <option value="@c.Id">@c.Nombre</option>
+        }
+    </select>
+
+    <select name="estanteId" class="form-control w-25 d-inline">
+        <option value="">Todos los estantes</option>
+        @foreach (var e in ViewBag.Estantes)
+        {
+            <option value="@e.Id">@e.Nombre</option>
+        }
+    </select>
+
+    <button class="btn btn-dark">Filtrar</button>
+</form>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Estante</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Vencimiento</th>
+            <th>Estado</th>
+            <th width="150px">Opciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string clase = "";
+
+            if (item.EstaVencido)
+                clase = "table-danger"; // rojo
+            else if (item.PorVencer30Dias)
+                clase = "table-warning"; // amarillo
+            else if (item.BajoStock)
+                clase = "table-info"; // celeste
+
+            <tr class="@clase">
+                <td>@item.Nombre</td>
+                <td>@item.Categoria.Nombre</td>
+                <td>@item.Estante.Nombre</td>
+                <td>@item.Precio</td>
+                <td>@item.Stock</td>
+                <td>@item.FechaVencimiento.ToShortDateString()</td>
+                <td>@(item.Estado ? "Activo" : "Inactivo")</td>
+
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Medicamento/Edit/@item.Id">Editar</a>
+                    <a class="btn btn-danger btn-sm" href="/Medicamento/Delete/@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
