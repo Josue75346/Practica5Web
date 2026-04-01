@@ -1,0 +1,34 @@
+﻿@model List<SistemaFarmacia.Models.Categoria>
+
+<h2>Listado de Categorías</h2>
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["mensaje"]</div>
+}
+
+<a class="btn btn-primary mb-3" href="/Categoria/Create">Nueva Categoría</a>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th width="150px">Opciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Descripcion</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Categoria/Edit/@item.Id">Editar</a>
+                    <a class="btn btn-danger btn-sm" href="/Categoria/Delete/@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+﻿@model SistemaFarmacia.Models.Estante
+
+<h2>Nuevo Estante</h2>
+
+<form method="post">
+
+    <label>Nombre</label>
+    <input asp-for="Nombre" class="form-control" />
+    <span asp-validation-for="Nombre" class="text-danger"></span>
+
+    <label class="mt-2">Ubicación</label>
+    <input asp-for="Ubicacion" class="form-control" />
+    <span asp-validation-for="Ubicacion" class="text-danger"></span>
+
+    <label class="mt-2">Descripción</label>
+    <textarea asp-for="Descripcion" class="form-control"></textarea>
+
+    <button class="btn btn-success mt-3">Guardar</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

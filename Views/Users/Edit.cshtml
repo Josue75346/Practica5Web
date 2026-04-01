@@ -1,0 +1,39 @@
+﻿@model SistemaFarmacia.Models.ApplicationUser
+
+<h2 class="fw-bold">Editar Usuario</h2>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input class="form-control" asp-for="Nombre" />
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input class="form-control" asp-for="Email" />
+    </div>
+
+    <div class="mb-3">
+        <label>CI</label>
+        <input class="form-control" asp-for="CI" />
+    </div>
+
+    <div class="mb-3">
+        <label>Rol actual:</label>
+        <strong>@ViewBag.RoleActual</strong>
+    </div>
+
+    <div class="mb-3">
+        <label>Nuevo Rol</label>
+        <select name="nuevoRol" class="form-select">
+            @foreach (var r in ViewBag.Roles)
+            {
+                <option>@r.Name</option>
+            }
+        </select>
+    </div>
+
+    <button class="btn btn-primary">Guardar</button>
+    <a href="/Users" class="btn btn-secondary">Volver</a>
+</form>

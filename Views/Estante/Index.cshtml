@@ -1,0 +1,36 @@
+﻿@model List<SistemaFarmacia.Models.Estante>
+
+<h2>Lista de Estantes</h2>
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["mensaje"]</div>
+}
+
+<a class="btn btn-primary mb-3" href="/Estante/Create">Nuevo Estante</a>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Ubicación</th>
+            <th>Descripción</th>
+            <th width="150px">Opciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Ubicacion</td>
+                <td>@item.Descripcion</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Estante/Edit/@item.Id">Editar</a>
+                    <a class="btn btn-danger btn-sm" href="/Estante/Delete/@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
